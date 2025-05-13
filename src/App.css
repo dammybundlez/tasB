@@ -1,0 +1,63 @@
+body{
+  font-family: "National Park", sans-serif;
+  color: white;
+}
+
+
+.story-scroll {
+  width: 100%;
+  overflow-x: auto; /* horizontal scroll */
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch; /* iOS smooth scroll */
+}
+
+.story-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+
+.search-scroll {
+  height: 30vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* white-space: nowrap; */
+  /* padding: 1rem; */
+  display: flex;
+  /* gap: 1rem; */
+  scrollbar-width: none; /* Firefox */
+  border-bottom: 10rem;
+}
+
+
+.story-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.search-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+.search-item{
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+.story-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(250, 204, 21); /* yellow-400 */
+  border-radius: 9999px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
