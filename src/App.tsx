@@ -7,6 +7,7 @@ import About from './pages/About.tsx'
 import Favorites from './pages/Favorites.tsx'
 import './index.css'
 import Home from './pages/Home.tsx'
+import NotFound from './pages/NotFound.tsx'
 
 
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/recipes" element={<RecipeGrid />} />
             <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
             <Route path="/recipe/:id" element={<RecipeDetail />} />
             <Route path="/favorites" element={<Favorites />} />
           </Routes>
