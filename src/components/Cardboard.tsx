@@ -1,9 +1,9 @@
-import  banner  from '../assets/banner.png'
+import  banner  from '../assets/img2.png'
 
 const Cardboard = () => {
   return (
-    <div className="relative lg:h-96">
-        <span className="absolute text-white lg:text-black lg:left-32 md:left-8 left-2 lg:top-40 top-20 font-semibold leading-16 text-3xl sm:text-4xl lg:text-5xl flex flex-col gap-3">
+    <div className="relative lg:h-52 rounded-lg">
+        <span className="absolute text-white lg:text-black lg:left-12 md:left-8 left-2 lg:top-16 top-20 font-semibold leading-10 text-3xl sm:text-4xl lg:text-4xl flex flex-col ">
             <p className="">Explore</p>
             <p className=""><span className="text-yellow-500">Culinary</span> Insights</p>
         </span>

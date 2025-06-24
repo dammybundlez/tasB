@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom"
-import { LuChefHat } from "react-icons/lu";
+import { LuChefHat, LuDessert, LuSalad } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import banner from '../assets/banner.png'
+import Cardboard from "../components/Cardboard";
+import { GiHotMeal, GiSelfLove } from "react-icons/gi";
+import { IoIosGlobe } from "react-icons/io";
+import { MdAccessTime, MdOutlineRemoveRedEye } from "react-icons/md";
+import { FaAngleLeft, FaAngleRight, FaLeaf } from "react-icons/fa";
+import { FaBowlFood, FaBowlRice } from "react-icons/fa6";
 
 
 const RecipeGrid = () => {
@@ -21,7 +27,7 @@ const RecipeGrid = () => {
     try {
         const response = await axios.get('https://api.spoonacular.com/recipes/complexSearch', {
         params: {
-            number: 30,
+            number: 9,
             apiKey: '93e68c41440948eb9b00e79f8e8fa67b',
             offset: (page - 1) * 30,
         },
@@ -45,21 +51,21 @@ const RecipeGrid = () => {
 
 
   return (
-    <div className="flex flex-col gap-5 gap-y-10">
-      <div className="lg:px-10 p-2 flex flex-col items-center justify-center">
-            <h2 className="text-3xl font-bold">What to <span className="text-yellow-500">Cook</span> ?</h2>
-            <div className="mt-7">
-                <ul className="flex flex-wrap gap-3 lg:gap-6 lg:text-lg justify-center items-center">
-                    <li className=""><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">All Types</Link></li>
-                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">Appetizers</Link></li>
-                    <li><Link to='' className="bg-gray-100 lg:px-4 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">Main Course</Link></li>
-                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">Salads and Sides</Link></li>
-                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">Vegetarians Delights</Link></li>
-                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">Healthy Eats</Link></li>
-                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">Desserts & Sweets</Link></li>
-                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">International Flavors</Link></li>
-                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">Quick & Easy Supper</Link></li>
-                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out">African Cuisine</Link></li>            
+    <div className="flex flex-col gap-5 gap-y-4">
+      <Cardboard />
+      <div className="lg:px-3 p-2 flex flex-col items-center justify-center">
+            <h2 className="text-3xl font-bold mb-3">What to <span className="text-yellow-500">Cook</span>?</h2>
+            <div className="my-7 ">
+                <ul className="flex flex-wrap font-semibold gap-3 lg:gap-y-3 lg:text-lg justify-center items-center">
+                    <li className=""><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out flex items-center gap-2"><GiHotMeal className="text-yellow-500" /> All Types</Link></li>
+                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out flex items-center gap-2"><FaBowlRice className="text-yellow-500" />Appetizers</Link></li>
+                    <li><Link to='' className="bg-gray-100 lg:px-4 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out flex items-center gap-2"><FaBowlFood className="text-yellow-500" />Main Course</Link></li>
+                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out flex items-center gap-2"><LuSalad className="text-yellow-500" />Salads and Sides</Link></li>
+                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out flex items-center gap-2"><FaLeaf className="text-yellow-500" />Vegetarians Delights</Link></li>
+                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out flex items-center gap-2"><IoIosGlobe className="text-yellow-500" />International Flavors</Link></li>
+                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out flex items-center gap-2"><LuDessert className="text-yellow-500" /> Desserts & Sweets</Link></li>
+                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out flex items-center gap-2"><GiSelfLove className="text-yellow-500" /> Healthy Eats</Link></li>
+                    <li><Link to='' className="bg-gray-100 lg:px-4 px-2 py-1 rounded-full hover:bg-[#000] hover:text-[#fff] duration-1000 ease-out flex items-center gap-2"><MdAccessTime className="text-yellow-500" />Quick & Easy Supper</Link></li>        
                 </ul>
             </div>
       </div>
@@ -76,21 +82,27 @@ const RecipeGrid = () => {
         <div className="flex flex-wrap justify-start w-full gap-2 lg:gap-5 gap-y-5 lg:gap-y-10">
          {error && <div className="text-red-500">{error}</div>}
         { recipes.map((recipe) => (
-              <div className="relative group rounded-md lg:w-[31.5%] w-[48.5%] md:w-[32% bg-gray-100">
-                  <Link to={`/recipe/${recipe.id}`} key={recipe.id} className="gap-2 py-3 px-2 bg-cover w-full bg-center bg-no-repeat duration-500 max-h-[500px] flex flex-col group-hover:rounded-md">
-                      <div className="group-hover:absolute group-hover:inset-0 rounded-md group-hover:bg-gradient-to-b group-hover:from-[#e9e4e4] to-gray-100" />
-                      <h2 className="font-normal lg:text-3xl lg:mb-4 text-blue truncate">{recipe.title} <br /> </h2>
-                      {/* <h2 className="font-normal text-3xl absolute top-0 group-hover:text-pink-500">{recipe.title}<br /></h2> */}
-                      <div className="w-full">
-                          <img className="rounded-lg w-full " src={recipe.image ? recipe.image : banner} alt="image" />
-                      </div>
+              <div className="relative group rounded-lg lg:w-[31.5%] w-[48.5%] md:w-[32% bg-gray-100">
+                  <Link to={`/recipe/${recipe.id}`} key={recipe.id} className="gap-2 py-3 px-2 bg-cover w-full bg-center bg-no-repeat duration-500  flex justify-between flex-col group-hover:rounded-md">
+                      {/* <div className="group-hover:absolute group-hover:inset-0 rounded-md group-hover:bg-gradient-to-b group-hover:from-[#e9e4e4] to-gray-100" /> */}
+                        <h2 className="font-medium lg:text-3xl lg:mb-4 text-blue  line-clamp-2 min-h-5 h-[4.5rem] mb-6">{recipe.title} </h2>
+                        {/* <h2 className="font-normal text-3xl absolute top-0 group-hover:text-pink-500">{recipe.title}<br /></h2> */}
+                        <div className="w-full relative">
+                            <img className="rounded-lg w-full h-[100%]" src={recipe.image ? recipe.image : banner} alt="image" />
+                            <p className="absolute right-2 top-2 bg-white shadow-sm font-semibold rounded-full w-20 px-2 py-1 flex gap-2 items-center">
+                              <span className="">
+                                <MdOutlineRemoveRedEye />  
+                              </span>
+                              200+
+                            </p>
+                            <Link to='' className=" mt-5 bg-[#000] w-full py-1 text-xs lg:text-sm px-2 rounded-full text-[#fff] flex justify-between items-center"> <span> See Complete Recipe </span> <span className="bg-white rounded-full p-1"> <LuChefHat className=" text-black"/> </span> </Link> 
+                        </div>
                       {/* <ul className="flex flex-wrap lg:gap-2 gap-y-2 group-hover:flex ease-out duration-1000">
                           <li><Link to='' className="bg-white text-black text-sm   px-2 lg:px-4 rounded-full ">{recipe.sourceName}</Link></li>
                           <li><Link to='' className="bg-white text-black text-sm   px-2 lg:px-4  rounded-full ">{`$${recipe.pricePerServing.toFixed(0)}`}</Link></li>
                           <li><Link to='' className="bg-white text-black text-sm   px-2 lg:px-4  rounded-full ">Guides</Link></li>
                           <li><Link to='' className="bg-white text-black text-sm   px-2 lg:px-4 rounded-full ">{`${recipe.aggregateLikes} +`}</Link></li>
                       </ul> */}
-                      <Link to='' className=" mt-5 bg-[#000] w-full py-1 text-xs lg:text-sm px-2 rounded-lg text-[#fff] flex justify-between items-center"> <span> See Complete Recipe </span> <span className="bg-white rounded-full p-1"> <LuChefHat className=" text-black"/> </span> </Link> 
                   </Link>
               </div>
             ))
@@ -101,19 +113,19 @@ const RecipeGrid = () => {
         <button
           onClick={() => setPage((p) => Math.max(p - 1, 1))}
           disabled={page === 1}
-          className={`px-4 py-2 rounded text-white ${page === 1 ? 'bg-gray-400 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-600'}`}
+          className={`px-4 py-2 rounded text-yellow-500 ${page === 1 ? 'text-yellow-300  cursor-not-allowed' : ' hover:text-yellow-300'}`}
         >
-          &lt;
+          <FaAngleLeft className="w-6 h-6" />
         </button>
-        <span className="text-lg font-semibold">
+        <span className="text-sm font-semibold">
           {page} / {totalPages}
         </span>
         <button
           onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
           disabled={page === totalPages}
-          className={`px-4 py-2 rounded text-white ${page === totalPages ? 'bg-gray-400 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-600'}`}
+          className={`px-4 py-2 rounded text-yellow-500 ${page === totalPages ? 'cursor-not-allowed' : 'text-yellow-500 hover:text-yellow-300'}`}
         >
-          &gt;
+          <FaAngleRight className="w-6 h-6" />
         </button>
       </div>
       <Footer/>

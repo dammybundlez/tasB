@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
-
-
+import { CgProfile } from 'react-icons/cg';
+import { FaSearch } from 'react-icons/fa';
 const Search = () => {
     const [query, setQuery] = useState<string>('');
     const [results, setResults] = useState<any[]>([]);
@@ -30,7 +30,7 @@ const Search = () => {
         try {
           const res = await axios.get('https://api.spoonacular.com/recipes/complexSearch' , {
             params: {
-              apiKey : "93e68c41440948eb9b00e79f8e8fa67b",
+              apiKey : "e7c8dea4c4154d9e89f3db3bc4a72c50",
               query: debouncedQuery,
               number: 10,
             },
@@ -59,7 +59,20 @@ const Search = () => {
   return (
     <div className='w-full relative'>
       <div className='relative'>
-        <input className="outline-none w-[80%] rounded-full lg:w-full md:w-full sm:w-full text-pink-500 bg-gray-200 px-4 py-1" type="text" placeholder="search recipes..." onClick={openSearch} value={query} onChange={(e) => setQuery(e.target.value)} />
+        <div className='flex items-center justify-between'>
+          <div className='flex items-center'>
+            <input className="outline-none w-[80%] rounded-full lg:w-[80%] md:w-full sm:w-full text-pink-500 bg-gray-200 px-4 py-1" type="text" placeholder="Search..." onClick={openSearch} value={query} onChange={(e) => setQuery(e.target.value)} />
+            <span className='rounded-full p-2 bg-gray-200'>
+              <FaSearch  />
+            </span>
+          </div>
+          <div className='rounded-full p-2 bg-black'>
+            <span>
+              <CgProfile className='text-white' />
+            </span>
+          </div>
+        </div>
+
         <div className='absolute right-0 top-10 w-[80%]'>     
           {loading && <p className='italic text-left text-gray-500 bg-gray-100 p-3'>searching...</p>}
           {!loading && results.length === 0 && debouncedQuery && (
