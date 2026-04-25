@@ -1,4 +1,3 @@
-// src/App.tsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header.tsx'
 import RecipeGrid from './pages/RecipeGrid'
@@ -7,6 +6,7 @@ import About from './pages/About.tsx'
 import Favorites from './pages/Favorites.tsx'
 import './index.css'
 import NotFound from './pages/NotFound.tsx'
+import Footer from './components/Footer.tsx'
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </Router>
   )

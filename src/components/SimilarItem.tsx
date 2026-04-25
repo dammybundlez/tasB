@@ -26,7 +26,7 @@ const foodImages = [
                 const res = await axios.get(`https://api.spoonacular.com/recipes/${id}/similar` ,
                    { params : { 
                       number : count,
-                      apiKey : "93e68c41440948eb9b00e79f8e8fa67b"
+                      apiKey : "fad5e6cd21ae4098b0c0767d8df7494e"
                     }});
                    setSimilar(res.data)
             } catch (err) {
