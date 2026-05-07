@@ -15,6 +15,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react'
+import HeroBanner from '../components/HeroBanner'
 
 interface Recipe {
   id: number
@@ -30,7 +31,7 @@ interface RecipeResponse {
   number: number
 }
 
-const API_KEY = ''
+const API_KEY = '93e68c41440948eb9b00e79f8e8fa67b'
 const ITEMS_PER_PAGE = 12
 
 const CATEGORIES = [
@@ -115,6 +116,7 @@ const RecipeGrid = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <HeroBanner/>
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">
@@ -190,7 +192,7 @@ const RecipeGrid = () => {
 
         {!loading && !error && recipes.length > 0 && (
           <>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-3">
               {recipes.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe} />
               ))}
@@ -300,7 +302,7 @@ const RecipeCard = ({ recipe }: { recipe: Recipe }) => {
             30 min
           </span>
           <span>·</span>
-          <span className="capitalize">{recipe.imageType}</span>
+          {/* <span className="capitalize">{recipe.cuisines[0] || 'Recipe'}</span> */}
         </div>
       </div>
     </Link>

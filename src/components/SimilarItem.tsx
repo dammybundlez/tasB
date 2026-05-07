@@ -1,62 +1,187 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from 'react-router-dom';
-import { LuChefHat } from 'react-icons/lu';
+import { useEffect, useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import {
+  ChefHat,
+  ArrowRight,
+  Loader2,
+  AlertCircle,
+  Clock,
+  Flame,
+} from 'lucide-react'
 
-const foodImages = [
-  'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTY2fHxmb29kfGVufDB8fDB8fHww,1',
-  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZvb2R8ZW58MHx8MHx8fDA%3D,2',
-  'https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGZvb2R8ZW58MHx8MHx8fDA%3D,3',
-  'https://images.unsplash.com/photo-1485963631004-f2f00b1d6606?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGZvb2R8ZW58MHx8MHx8fDA%3D,4',
-  'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fGZvb2R8ZW58MHx8MHx8fDA%3D,5',
-  'https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTJ8fGZvb2R8ZW58MHx8MHx8fDA%3D,6',
-  'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGZvb2R8ZW58MHx8MHx8fDA%3D,7',
-  'https://images.unsplash.com/photo-1539136788836-5699e78bfc75?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA3fHxmb29kfGVufDB8fDB8fHww,8',
-  'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTIwfHxmb29kfGVufDB8fDB8fHww,9',
-  'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI0fHxmb29kfGVufDB8fDB8fHww,10',
-];
+interface SimilarRecipe {
+  id: number
+  title: string
+  readyInMinutes: number
+  servings: number
+  sourceUrl: string
+}
 
-    const SimilarItem = ({ id }: { id: string }) => {
-    const [similar, setSimilar] = useState<any[]>([]);
+interface SimilarItemProps {
+  id: string
+}
 
-    
-    useEffect(() => {
-        const fetchSimilar = async ( count : number = 10) => {
-            try {
-                const res = await axios.get(`https://api.spoonacular.com/recipes/${id}/similar` ,
-                   { params : { 
-                      number : count,
-                      apiKey : "fad5e6cd21ae4098b0c0767d8df7494e"
-                    }});
-                   setSimilar(res.data)
-            } catch (err) {
-              console.error("Error fetching similar recipes", err);
-            }
-        }
-        fetchSimilar()
-    } , [id])
-   
-    if(!similar) return <p>Loading similar items...</p>
-  return (
-    <div className="">
-      <div className="space-x-2 px-2 lg:px-4 md:px-2 story-scroll">
-      {
-         similar.map((recipe , i) => {
-          const imageUrl = foodImages[i % foodImages.length];
-          return(
-          <div onClick={() => window.location.reload()} className="story-item w-[55%] lg:w-[25%] sm:w-[35%] md:w-[32%] bg-gray-200">
-            <Link to={`/recipe/${recipe.id}`} key={recipe.id}  className="bg-gray-100 rounded-lg shadow-md p-4  gap-2 py-3 px-2 bg-cover w-full bg-center bg-no-repeat duration-500 flex flex-col group-hover:rounded-md">
-                <h2 className=" text-black text-lg lg:text-lg font-bold mb-4 line-clamp-3"> {recipe.title} <br /> </h2>
-                <div className="relative">
-                  <img className="rounded-lg h-40" src={imageUrl} alt="aktl" />
-                  <p className="absolute bottom-2 bg-[#000] w-[95%] text-center left-1 py-1 text-sm px-2 rounded-full  text-[#fff] flex justify-between items-center"> <span> See Complete Recipe </span> <span className="bg-white rounded-full p-1"> <LuChefHat className=" text-black"/> </span> </p> 
-                </div>
-            </Link>
-          </div>)
-        })
+const API_KEY = import.meta.env.VITE_SPOONACULAR_API_KEY || '93e68c41440948eb9b00e79f8e8fa67b'
+
+const FALLBACK_IMAGES = [
+  'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1485963631004-f2f00b1d6606?w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1539136788836-5699e78bfc75?w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&auto=format&fit=crop',
+]
+
+const SimilarItem = ({ id }: SimilarItemProps) => {
+  const [similar, setSimilar] = useState<SimilarRecipe[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const fetchSimilar = async () => {
+      if (!API_KEY) {
+        setError('API key not configured')
+        setLoading(false)
+        return
       }
+
+      try {
+        const res = await axios.get<SimilarRecipe[]>(
+          `https://api.spoonacular.com/recipes/${id}/similar`,
+          {
+            params: {
+              number: 8,
+              apiKey: API_KEY,
+            },
+          }
+        )
+        setSimilar(res.data)
+      } catch (err) {
+        setError('Failed to load similar recipes')
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchSimilar()
+  }, [id])
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (!scrollRef.current) return
+    const scrollAmount = 320
+    scrollRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    })
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center gap-3 py-8 text-slate-400">
+        <Loader2 className="w-5 h-5 animate-spin" />
+        <span className="text-sm">Finding similar recipes...</span>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center gap-2 py-8 text-rose-500 text-sm">
+        <AlertCircle className="w-4 h-4" />
+        {error}
+      </div>
+    )
+  }
+
+  if (similar.length === 0) {
+    return (
+      <p className="text-slate-400 text-sm py-8">No similar recipes found.</p>
+    )
+  }
+
+  return (
+    <div className="relative group">
+      {/* Scroll buttons */}
+      <button
+        onClick={() => scroll('left')}
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 backdrop-blur shadow-lg rounded-full flex items-center justify-center text-slate-600 hover:bg-white hover:text-slate-900 transition-all opacity-0 group-hover:opacity-100 -translate-x-1/2"
+      >
+        <ArrowRight className="w-4 h-4 rotate-180" />
+      </button>
+
+      <button
+        onClick={() => scroll('right')}
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 backdrop-blur shadow-lg rounded-full flex items-center justify-center text-slate-600 hover:bg-white hover:text-slate-900 transition-all opacity-0 group-hover:opacity-100 translate-x-1/2"
+      >
+        <ArrowRight className="w-4 h-4" />
+      </button>
+
+      {/* Scroll container */}
+      <div
+        ref={scrollRef}
+        className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 -mx-4 px-4"
+      >
+        {similar.map((recipe, index) => (
+          <SimilarCard
+            key={recipe.id}
+            recipe={recipe}
+            imageUrl={FALLBACK_IMAGES[index % FALLBACK_IMAGES.length]}
+          />
+        ))}
       </div>
     </div>
+  )
+}
+
+const SimilarCard = ({recipe, imageUrl}: { recipe: SimilarRecipe, imageUrl: string}) => {
+  return (
+    <Link
+      to={`/recipe/${recipe.id}`}
+      className="flex-shrink-0 w-72 snap-start group/card"
+    >
+      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 transition-all duration-300">
+        <div className="relative aspect-[4/3] overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={recipe.title}
+            className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
+
+          <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover/card:translate-y-0 transition-transform duration-300">
+            <span className="inline-flex items-center gap-1.5 text-white text-xs font-medium bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+              View Recipe
+              <ChefHat className="w-3 h-3" />
+            </span>
+          </div>
+        </div>
+
+        <div className="p-4">
+          <h3 className="font-semibold text-slate-900 text-sm leading-snug line-clamp-2 group-hover/card:text-amber-600 transition-colors">
+            {recipe.title}
+          </h3>
+
+          <div className="mt-3 flex items-center gap-3 text-xs text-slate-500">
+            <span className="flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              {recipe.readyInMinutes}m
+            </span>
+            <span className="flex items-center gap-1">
+              <Flame className="w-3 h-3" />
+              {recipe.servings} servings
+            </span>
+          </div>
+        </div>
+      </div>
+    </Link>
   )
 }
 

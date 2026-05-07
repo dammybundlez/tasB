@@ -10,7 +10,6 @@ import {
   Star,
   Link2,
   ArrowRight,
-  Timer,
   Flame,
   Loader2,
   AlertCircle,
@@ -18,7 +17,6 @@ import {
 import { useFavorites } from '../context/FavContext'
 import SimilarItem from '../components/SimilarItem'
 
-// Types
 interface Recipe {
   id: number
   title: string
@@ -54,7 +52,7 @@ interface Nutrition {
   fat: string
 }
 
-const API_KEY =  'fad5e6cd21ae4098b0c0767d8df7494e'
+const API_KEY =  '93e68c41440948eb9b00e79f8e8fa67b'
 
 const RecipeDetail = () => {
   const { id } = useParams<{ id: string }>()
@@ -108,7 +106,6 @@ const RecipeDetail = () => {
     isFavorite(recipe.id) ? removeFavorites(recipe.id) : addFavorites(recipe)
   }
 
-  // Loading state
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
@@ -150,7 +147,6 @@ const RecipeDetail = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Hero */}
       <div className="relative h-64 md:h-80 lg:h-96">
         <img
           src={recipe.image}
@@ -170,7 +166,6 @@ const RecipeDetail = () => {
           </h1>
         </div>
 
-        {/* Favorite button */}
         <button
           onClick={handleFavorite}
           className={`
@@ -187,7 +182,6 @@ const RecipeDetail = () => {
         </button>
       </div>
 
-      {/* Meta Stats */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 md:p-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -220,7 +214,6 @@ const RecipeDetail = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column */}
@@ -299,9 +292,7 @@ const RecipeDetail = () => {
             </section>
           </div>
 
-          {/* Right Column */}
           <div className="space-y-6">
-            {/* Nutrition Card */}
             <div className="bg-white rounded-2xl border border-slate-200 p-6">
               <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <Flame className="w-5 h-5 text-amber-500" />
@@ -332,7 +323,6 @@ const RecipeDetail = () => {
               </a>
             )}
 
-            {/* Chef Card */}
             <div className="relative rounded-2xl overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&auto=format&fit=crop"
